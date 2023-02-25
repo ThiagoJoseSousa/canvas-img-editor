@@ -1,0 +1,26 @@
+Functionality:
+at least memes generator
+
+design inspired from:
+https://www.kapwing.com/studio/editor
+
+https://www.youtube.com/watch?v=Aew5auHUzLY
+Don't rely too much on the developer tools. The canvas was resizing accordingly but didn't happen only on tools
+flex: 1 or maybe an item wont occupy space on the page.
+
+Use the "value" tag of a radio button name-list, don't forget to add the element before the add event listener command
+and "change" event lsitener
+
+https://css-tricks.com/html-inputs-and-labels-a-love-story/
+it is always the best idea to use an explicit label instead of an implicit label. Which is using for and input outside of label.
+when we’re working with a group of inputs, say several radio buttons or checkboxes. In these cases, a <legend> element is used to group certain input elements, such as radio buttons, and serves as the accessible label for the entire group.
+Only input type="submit" or type="button" does not need a label, the remaining inputs are happier with the mentioned.
+the visual order of a page should follow the order in which elements appear in the DOM. That’s because: Impaired men.
+It is conventional to place the label on the right-hand side of the input for checkboxes and radio buttons. This can be done by placing the label after the input in the HTML, ensuring the DOM and visual order match.
+https://kittygiraudel.com/snippets/sr-only-class/
+The .sr-only class is a utility class aiming at visually hiding the element while keeping it accessible to assistive technologies such as screen-readers.
+Visible: no (removed from layout)
+Accessible: yes
+Element + children focusable: yes (⚠️)
+Verdict: 👍 Great to visually hide text content while preserving it for assistive technologies.
+Don’t: Substitute a label with another attribute or element

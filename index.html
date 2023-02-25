@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="canvas.js" defer></script>
+    <title>Image Editor</title>
+</head>
+<body>
+    <header>
+        <nav class="header__nav">
+        <ul class="nav__list">
+            <li><a href=""><img src="icons/paint-bucket.png" alt=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href="">Save</a></li>
+        </ul>
+    </nav>
+    
+</header>
+<main class="editor">
+        <section class="editor__tools">
+            <div class="tools__open" id="media">
+                <img src="icons/folder-open.png" alt="">
+            </img>
+            <label for="media">Media</label>
+            </div>
+            <div class="tools__open" id="layer">
+                <img src="icons/layer-multiple.png" alt="">
+            </img>
+            <label for="layer">Layer</label>
+            </div>
+            <div class="tools__open" id="write">
+                <img src="icons/pencil-text.png" alt="">
+            </img>
+            <label for="write">Write</label>
+            </div>
+            <div class="tools__open" id="shapes">
+                <img src="icons/circle-lined.png" alt="">
+                </img>
+                <label for="shapes">Shapes</label>
+            </div>
+            <div class="tools__open" id="drawing">
+                <img src="icons/paintbrush.png" alt="">
+            </img>
+            <label for="drawing">Drawing</label>
+            </div>
+            <div class="tools__open" id="rotate">
+                <img src="icons/weather.png" alt="">
+            </img>
+            <label for="rotate">Rotate</label>
+            </div>
+            <div class="tools__open" id="filter">
+                <img src="icons/filter.png" alt="">
+            </img>
+            <label for="filter">Filter</label>
+            </div>
+            <div class="tools__open" id="clearcanvas">
+                <img src="icons/x-mark.png" alt="">
+            </img>
+            <label for="clearcanvas">Clear canvas</label>
+            </div>
+            <div class="tools__open" id="lock-icon">
+                <img src="icons/lock-icon.png" alt="">
+            </img>
+            <label for="lock-icon">Example</label>
+            </div>
+            <div class="tools__open" id="lock-icon-1">
+                <img src="icons/lock-icon.png" alt="">
+            </img>
+            <label for="lock-icon-1">Example</label>
+            </div>
+            <div class="tools__open" id="lock-icon-2">
+                <img src="icons/lock-icon.png" alt="">
+                </img>
+                <label for="lock-icon-2">Example</label>
+            </div>
+            <div class="tools__open" id="lock-icon-3">
+                <img src="icons/lock-icon.png" alt="">
+                </img>
+                <label for="lock-icon-3">Example</label>
+            </div>
+            <div class="tools__open" id="lock-icon-4">
+            <img src="icons/lock-icon.png" alt="">
+            </img>
+              <label for="lock-icon-4">Example</label>
+            </div>
+            <div class="tools__open" id="lock-icon-5">
+                <img src="icons/lock-icon.png" alt="">
+            </img>
+            <label for="lock-icon-5">Example</label>
+            </div>
+            <div class="tools__open" id="lock-icon-6">
+                <img src="icons/lock-icon.png" alt="">
+            </img>
+            <label for="lock-icon-6">Example</label>
+            </div>
+        </section>
+        <section class="editor__tools--config">
+            <img src="icons/arrow-left.png" id="close__config" alt="" width="30" height="30"> 
+            </img>
+            <div class="config--hidden" id="drawing__config">
+                <span class="config__title">
+                    Line width
+                </span>
+                <input type="range" id="line-width" min="1">
+                <span class="config__title">
+                    Colors
+                </span>
+                <div class=".config__colors">
+                    <input type="radio" name="color" class="config__color config__color--black" value="black" checked>
+                    <input type="radio" name="color" class="config__color config__color--red" value="red">
+                    <input type="radio" name="color" class="config__color config__color--green" value="green">
+                    <input type="radio" name="color" class="config__color config__color--blue" value="blue">
+                </div>
+                <span class="config__title">
+                    Eraser
+                </span> 
+                <input type="radio" name="color" class="config__color config__color--eraser" value="white">
+                <span class="config__title">
+                    Fill bucket
+                </span>
+                <button></button>
+            </div>
+
+            <div class="config--hidden" id="shapes__config">
+                <span class="config__title">
+                    Rectangle
+                </span>
+                
+                <div class="config__shapes">
+                    <input type="radio" name="shapes" class="config__shape">
+                </div>
+                <span class="config__title">
+                    Circle
+                </span>
+                    <input type="radio" name="shapes" class="config__shape">
+                    <span class="config__title">
+                        Triangle
+                    </span>
+                    <input type="radio" name="shapes" class="config__shape">
+                    <span class="config__title">
+                        Line
+                    </span>
+                    <input type="radio" name="shapes" class="config__shape">
+                    <span class="config__title">
+                        Curved line
+                    </span>
+                    <input type="radio" name="shapes" class="config__shape">
+            </div>
+
+            <div class="config--hidden" id="text__config">
+
+            </div>
+        </section>
+        <section class="editor__view">
+            <div class="view__container">
+                <canvas class="view__canvas"></canvas>
+            </div>
+        </section>
+        <section class="editor__platform-config"><div>
+            
+            <div class="platform-config__tool">
+                <img src="icons/resize-10-48.png" alt="" class="platform-config__tool-icon"> </img> 
+                Resize Image
+            </div>
+            <div class="platform-config__resizer">
+                <input type="file" class="resizer__file">
+                <div class="file__dimensions">
+                    <input type="text" name="" class="resizer__input resizer__input--width" value="0">
+                    x
+                    <input type="text" name="" id="" class="resizer__input resizer__input--height" value="0">
+                    <label for="">
+                        <input type="checkbox" class="resizer__aspect" checked>
+                        Keep Aspect Ratio
+                    </label>
+                    <br>
+                </div>
+                <div class="platform-config__ratio">
+                    <div>
+                        Resize and clear canvas
+                    </div>
+                    <div class="canvas__size">
+                    </div>
+                    <label for="">
+                        <input type="radio" name="ratio" value="1x1" checked>
+                        1:1
+                    </label>
+                    <label for="">
+                        <input type="radio" name="ratio" value="16x9" >
+                        16:9
+                    </label>
+                    <label for="">
+                        <input type="radio" name="ratio" value="9x16" >
+                        9:16
+                    </label>
+                </div>
+            </div>
+        </div></section>
+    </main>
+</body>
+</html>

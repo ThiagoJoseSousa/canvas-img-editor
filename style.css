@@ -1,0 +1,168 @@
+  @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    --page-height:calc(100vh - 36px);
+    font-family: 'Varela Round', sans-serif;
+}
+ /* layout  */
+.nav__list{
+    height: 100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.header__nav{ 
+    display: block;
+    height: 36px;
+    background-color: black;
+}
+
+.editor {
+    display:flex;
+    height: var(--page-height);
+}
+
+.editor__tools{
+    background-color: black;
+    color: white;
+    height: var(--page-height);
+    width: 56px;
+    flex-direction: column;
+    text-align: center;
+    font-size: 10px;
+    overflow: scroll;
+}
+
+.tools__open img{
+    width: 24px;
+    height: 24px;
+}
+
+.tools__open{
+    padding:14px 4px;
+}
+
+.editor__tools::-webkit-scrollbar{
+    display: none;
+}
+
+.editor__view{
+    background-color: #202020;
+    flex: 1;
+}
+
+.editor__platform-config{
+    width: 256px;
+    background-color: black;
+    height: var(--page-height);
+}
+
+/* hover effect */
+.tools__open:hover{
+    background-color: rgb(77, 74, 74);
+}
+
+/* canvas */
+.editor__view{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.view__canvas{
+    display: block;
+    background-color: white;
+    margin: auto;
+}
+
+.view__container{
+    display:flex;
+    height: 95%;
+    width: 95%;
+}
+
+.resizer__input{
+    width: 75px;
+    padding: 5px;
+}
+
+.platform-config__resizer{
+    color: white;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.file__dimensions label{
+    display: block;
+}
+
+.platform-config__tool{
+    color:white;
+    text-align: center;
+}
+.platform-config__tool-icon{
+    width: 25px;
+    height: 15px;
+}
+
+/* editor tools config */
+.editor__tools--config {
+    background-color: black;
+    color: white;
+    flex: 1;
+    max-width: 215px;
+    border-left-style:solid;
+    border-left-color: aliceblue;
+    border-left-width: 5px;
+}
+
+.tools__open--active {
+    background-color: grey;
+}
+
+.tools__open img, .tools__open div {
+    pointer-events: none;
+}
+
+.editor__tools--config img{
+    display: block;
+    margin-left: auto;
+}
+
+.drawing__config {
+    color: white;
+}
+
+.config__title{
+    display: block;
+}
+.config__colors{
+    display: flex;
+    background-color: aliceblue;
+}
+
+.config__color--black {
+    accent-color: black;
+}
+.config__color--blue {
+    accent-color: blue;
+}
+.config__color--red {
+    accent-color: red;
+}
+.config__color--green {
+    accent-color: green;
+}
+.config__color--eraser{
+    accent-color:white;
+}
+
+.config--hidden {
+    display: none;
+}
