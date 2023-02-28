@@ -24,3 +24,12 @@ Accessible: yes
 Element + children focusable: yes (⚠️)
 Verdict: 👍 Great to visually hide text content while preserving it for assistive technologies.
 Don’t: Substitute a label with another attribute or element
+
+It's a simple HTML code. Inside the body tag, we will use the div tag and put everything that we need inside it. 
+It is good practice to keep your code organized like this, and it will also make the button and image element block because div is a block element,
+ so anything inside it will also become a block.
+
+ make a fake canvas so the previous image is saved. You draw the real canvas into the fake canvas ctx and then
+ drive the fake canvas into real canvas ctx. 
+
+ 

@@ -115,45 +115,56 @@
                     Colors
                 </span>
                 <div class=".config__colors">
-                    <input type="radio" name="color" class="config__color config__color--black" value="black" checked>
-                    <input type="radio" name="color" class="config__color config__color--red" value="red">
-                    <input type="radio" name="color" class="config__color config__color--green" value="green">
-                    <input type="radio" name="color" class="config__color config__color--blue" value="blue">
+                    <input type="radio" id="config__color--black" name="color" class="config__color config__color--black" hidden value="black" checked>
+                    <input type="radio" id="config__color--red" name="color" class="config__color config__color--red" hidden value="red">
+                    <input type="radio" id="config__color--green" name="color" class="config__color config__color--green" hidden value="green">
+                    <input type="radio" id="config__color--blue" name="color" class="config__color config__color--blue" hidden value="blue">
+                    <label for="config__color--black" class="color__label color__label--black">                        
+                    </label>
+                    <label for="config__color--red" class="color__label color__label--red">
+                    </label>
+                    <label for="config__color--green" class="color__label color__label--green">
+                    </label>
+                    <label for="config__color--blue" class="color__label color__label--blue">
+                    </label>
                 </div>
                 <span class="config__title">
                     Eraser
                 </span> 
-                <input type="radio" name="color" class="config__color config__color--eraser" value="white">
+                <input type="radio" name="color" id="config__color--white" class="config__color config__color--eraser" hidden value="white">
+                <label for="config__color--white" class="color__label color__label--white"></label>
                 <span class="config__title">
                     Fill bucket
                 </span>
-                <button></button>
+                <button class="paint-bucket">
+                    <img src="icons/paint-bucket.png" alt=""> </img>
+                </button>
             </div>
 
             <div class="config--hidden" id="shapes__config">
                 <span class="config__title">
-                    Rectangle
+                    Closed shapes
                 </span>
-                
-                <div class="config__shapes">
-                    <input type="radio" name="shapes" class="config__shape">
-                </div>
-                <span class="config__title">
-                    Circle
-                </span>
-                    <input type="radio" name="shapes" class="config__shape">
+                    <input type="radio" name="shapes" id="rectangle" hidden>
+                    <input type="radio" name="shapes" id="circle" hidden>
+                    <input type="radio" name="shapes" id="triangle" hidden>
+                    <label class="config__shape" for="rectangle">□</label>
+                    <label class="config__shape" for="circle">○</label>
+                    <label class="config__shape" for="triangle">△</label>
                     <span class="config__title">
-                        Triangle
+                    Draw shapes
                     </span>
-                    <input type="radio" name="shapes" class="config__shape">
+                    <input type="radio" name="shapes" id="line" hidden>
+                    <input type="radio" name="shapes" id="curved-line" hidden>
+                    <label class="config__shape" for="line">―</label>
+                    <label class="config__shape" for="curved-line">◠</label>
+                    
                     <span class="config__title">
-                        Line
+                        Fill bucket
                     </span>
-                    <input type="radio" name="shapes" class="config__shape">
-                    <span class="config__title">
-                        Curved line
-                    </span>
-                    <input type="radio" name="shapes" class="config__shape">
+                    <button class="paint-bucket">
+                        <img src="icons/paint-bucket.png" alt=""> </img>
+                    </button>
             </div>
 
             <div class="config--hidden" id="text__config">
@@ -174,31 +185,32 @@
             <div class="platform-config__resizer">
                 <input type="file" class="resizer__file">
                 <div class="file__dimensions">
-                    <input type="text" name="" class="resizer__input resizer__input--width" value="0">
+                    <input type="text" name="" id="resizer__input--width" class="resizer__input" value="0">
                     x
-                    <input type="text" name="" id="" class="resizer__input resizer__input--height" value="0">
-                    <label for="">
-                        <input type="checkbox" class="resizer__aspect" checked>
+                    <input type="text" name="" id="resizer__input--height" class="resizer__input" value="0">
+                    <br>
+                    <input type="checkbox" id="resizer__aspect" checked>
+                    <label for="resizer__aspect">
                         Keep Aspect Ratio
                     </label>
-                    <br>
                 </div>
+                <br>
                 <div class="platform-config__ratio">
                     <div>
                         Resize and clear canvas
                     </div>
                     <div class="canvas__size">
                     </div>
-                    <label for="">
-                        <input type="radio" name="ratio" value="1x1" checked>
+                    <input type="radio" name="ratio" value="1x1" id="1:1" checked>
+                    <label for="1:1">
                         1:1
                     </label>
-                    <label for="">
-                        <input type="radio" name="ratio" value="16x9" >
+                    <input type="radio" name="ratio" value="16x9" id="16:9">
+                    <label for="16:9">
                         16:9
                     </label>
-                    <label for="">
-                        <input type="radio" name="ratio" value="9x16" >
+                    <input type="radio" name="ratio" value="9x16" id="9:16">
+                    <label for="9:16">
                         9:16
                     </label>
                 </div>

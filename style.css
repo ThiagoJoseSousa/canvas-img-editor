@@ -98,10 +98,6 @@
     overflow: hidden;
 }
 
-.file__dimensions label{
-    display: block;
-}
-
 .platform-config__tool{
     color:white;
     text-align: center;
@@ -144,25 +140,60 @@
 }
 .config__colors{
     display: flex;
-    background-color: aliceblue;
 }
 
-.config__color--black {
-    accent-color: black;
+.color__label.color__label--black {
+    background-color: black;
 }
-.config__color--blue {
-    accent-color: blue;
+.color__label.color__label--blue {
+    background-color: blue;
 }
-.config__color--red {
-    accent-color: red;
+.color__label.color__label--red {
+    background-color: red;
 }
-.config__color--green {
-    accent-color: green;
+.color__label.color__label--green {
+    background-color: green;
 }
-.config__color--eraser{
-    accent-color:white;
+.color__label.color__label--eraser{
+    background-color:white;
 }
 
 .config--hidden {
     display: none;
+}
+
+.color__label{
+    background-color: white;
+    border: 1px solid white ;
+    border-radius: 50%;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+
+.color__label:active {
+    background-color: rgb(0, 255, 255);
+}
+
+.paint-bucket{
+    background-color: black;
+}
+
+.config__shape {
+    background: white;
+    color: black;
+    display: inline-block;
+    padding: 5px;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.config__title{
+    margin:20px 0px;
+}
+
+#shapes__config, #drawing__config {
+    text-align: center;
 }
