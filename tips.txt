@@ -32,4 +32,19 @@ It is good practice to keep your code organized like this, and it will also make
  make a fake canvas so the previous image is saved. You draw the real canvas into the fake canvas ctx and then
  drive the fake canvas into real canvas ctx. 
 
- 
+ use the 'checked' property of checkboxes to know if a checkbox is checked
+
+ // meu pensamento da lógica. Desenha 1 retangulo 0,0 e via desenhando conforme via mexendo o mouse, porem 
+tambem via apagando, exceto que quando solta não apaga. 
+//Tudo certo, a única coisa que esqueci foi a flag. O listener de mouse move fica presente o tempo todo, apenas retorna mais cedo baseado na flag.
+Esse listener escuta no max 60 movimentos por segundo, sendo que para junto do mouse (apenas dentro do canvas). N é tão pesado. 
+
+https://stackoverflow.com/questions/61700457/layering-the-canvas-without-multiple-canvases
+
+As I went following the tutorial, I saw many formats. A good example is image data.data to canvas width. A conversion
+got made with a weird formula. It didn't stood as the only one, since the hex color used regex to become RGB. 
+
+moveTo() creates a new subpath inside the beginPath(). closePath() works for subpaths too.
+
+four initial values = just the curve thus the first point stays on moveTo
+        ctx.bezierCurveTo(100,100,100,100,shapeEnd['x'],shapeEnd['y'])

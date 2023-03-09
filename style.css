@@ -7,6 +7,21 @@
     --page-height:calc(100vh - 36px);
     font-family: 'Varela Round', sans-serif;
 }
+#logo {
+    align-items: center;
+    color: rgb(252, 164, 49);
+    display: flex;
+    font-size: 12px;
+    height:36px;
+    text-decoration: none;
+}
+
+#logo img{
+    display: inline-block;
+    margin: 10px;
+    height: 36px;
+}
+
  /* layout  */
 .nav__list{
     height: 100%;
@@ -102,9 +117,12 @@
     color:white;
     text-align: center;
 }
-.platform-config__tool-icon{
+
+.platform-config__tool--icon{
     width: 25px;
-    height: 15px;
+    height: 25px;
+    position: relative;
+    top: 7px;
 }
 
 /* editor tools config */
@@ -196,4 +214,16 @@
 
 #shapes__config, #drawing__config {
     text-align: center;
+}
+
+#resizer__file {
+    display: none;
+}
+
+#resizer__file--label{
+    display: inline-block;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    padding: 5px;
+    margin: 5px;
 }

@@ -12,7 +12,7 @@
     <header>
         <nav class="header__nav">
         <ul class="nav__list">
-            <li><a href=""><img src="icons/paint-bucket.png" alt=""></a></li>
+            <li><a href="#" id="logo"><img src="icons/logo.png" alt="Fox logo"><h1>Image Editor</h1></a></li>
             <li><a href=""></a></li>
             <li><a href=""></a></li>
             <li><a href=""></a></li>
@@ -35,7 +35,7 @@
             <div class="tools__open" id="layer">
                 <img src="icons/layer-multiple.png" alt="">
             </img>
-            <label for="layer">Layer</label>
+            <label for="layer">Layer Make a ruler</label>
             </div>
             <div class="tools__open" id="write">
                 <img src="icons/pencil-text.png" alt="">
@@ -134,10 +134,10 @@
                 <input type="radio" name="color" id="config__color--white" class="config__color config__color--eraser" hidden value="white">
                 <label for="config__color--white" class="color__label color__label--white"></label>
                 <span class="config__title">
-                    Fill bucket
+                    Fill bucket needing fix, also, put colors together with bucket. A good idea is a section just for colors, instead filters.
                 </span>
                 <button class="paint-bucket">
-                    <img src="icons/paint-bucket.png" alt=""> </img>
+                    <img src="icons/paint-bucket.png" alt=""></img>
                 </button>
             </div>
 
@@ -150,19 +150,19 @@
                     <input type="radio" name="shapes" id="triangle" hidden>
                     <label class="config__shape" for="rectangle">□</label>
                     <label class="config__shape" for="circle">○</label>
-                    <label class="config__shape" for="triangle">△</label>
+                    <label class="config__shape" for="triangle">⊿</label>
                     <span class="config__title">
-                    Draw shapes
+                    Draw shapes (needs bezier curve)
                     </span>
                     <input type="radio" name="shapes" id="line" hidden>
                     <input type="radio" name="shapes" id="curved-line" hidden>
                     <label class="config__shape" for="line">―</label>
-                    <label class="config__shape" for="curved-line">◠</label>
+                    <label class="config__shape" for="curved-line">~</label>
                     
                     <span class="config__title">
                         Fill bucket
                     </span>
-                    <button class="paint-bucket">
+                    <button class="paint-bucket" id="paint-bucket">
                         <img src="icons/paint-bucket.png" alt=""> </img>
                     </button>
             </div>
@@ -179,11 +179,18 @@
         <section class="editor__platform-config"><div>
             
             <div class="platform-config__tool">
-                <img src="icons/resize-10-48.png" alt="" class="platform-config__tool-icon"> </img> 
-                Resize Image
+                <img src="icons/frame.png" alt="icon" class="platform-config__tool--icon">
+                Frame 
             </div>
             <div class="platform-config__resizer">
-                <input type="file" class="resizer__file">
+                Image from PC
+                <input type="file" id="resizer__file">
+                <br>
+                <label for="resizer__file" id="resizer__file--label">Open image</label>
+                <br>
+                <input type="checkbox" name="" id="imgFillCanvas">
+                <label for="imgFillCanvas">Take all space</label> 
+                    <p><br>Change resolution</p>
                 <div class="file__dimensions">
                     <input type="text" name="" id="resizer__input--width" class="resizer__input" value="0">
                     x
@@ -197,9 +204,13 @@
                 <br>
                 <div class="platform-config__ratio">
                     <div>
-                        Resize and clear canvas
+                        Current resolution
                     </div>
                     <div class="canvas__size">
+                    </div>
+                    <br>
+                    <div>
+                        Change aspect ratio
                     </div>
                     <input type="radio" name="ratio" value="1x1" id="1:1" checked>
                     <label for="1:1">
