@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="icons/favicon.png">
     <script src="canvas.js" defer></script>
     <title>Image Editor</title>
 </head>
@@ -20,28 +21,24 @@
             <li><a href=""></a></li>
             <li><a href=""></a></li>
             <li><a href=""></a></li>
-            <li><a href="">Save</a></li>
+            <li><button id="save-btn">Save</button></li>
         </ul>
     </nav>
     
 </header>
 <main class="editor">
         <section class="editor__tools">
-            <div class="tools__open" id="media">
-                <img src="icons/folder-open.png" alt="">
-            </img>
-            <label for="media">Media</label>
-            </div>
             <div class="tools__open" id="layer">
+
                 <img src="icons/layer-multiple.png" alt="">
             </img>
-            <label for="layer">Layer Make a ruler</label>
-            </div>
+            <label for="layer">Layer</label>
+            </div>            
             <div class="tools__open" id="write">
-                <img src="icons/pencil-text.png" alt="">
+            <img src="icons/pencil-text.png" alt="">
             </img>
             <label for="write">Write</label>
-            </div>
+            </div>  
             <div class="tools__open" id="shapes">
                 <img src="icons/circle-lined.png" alt="">
                 </img>
@@ -51,22 +48,24 @@
                 <img src="icons/paintbrush.png" alt="">
             </img>
             <label for="drawing">Drawing</label>
-            </div>
-            <div class="tools__open" id="rotate">
-                <img src="icons/weather.png" alt="">
-            </img>
-            <label for="rotate">Rotate</label>
-            </div>
-            <div class="tools__open" id="filter">
-                <img src="icons/filter.png" alt="">
-            </img>
-            <label for="filter">Filter</label>
-            </div>
+            </div>            
+          
             <div class="tools__open" id="clearcanvas">
                 <img src="icons/x-mark.png" alt="">
             </img>
             <label for="clearcanvas">Clear canvas</label>
+            </div>                
+            <div class="tools__open" id="media">
+                    <img src="icons/folder-open.png" alt="">
+                </img>
+                <label for="media">Media</label>
             </div>
+            <div class="tools__open" id="Scroll">
+                <img src="icons/weather.png" alt="">
+            </img>
+            <label for="Scroll">Scroll</label>
+            </div>
+        
             <div class="tools__open" id="lock-icon">
                 <img src="icons/lock-icon.png" alt="">
             </img>
@@ -116,15 +115,15 @@
                 </span>
                 <div class=".config__colors">
                     <input type="radio" id="config__color--black" name="color" class="config__color config__color--black" hidden value="black" checked>
-                    <input type="radio" id="config__color--red" name="color" class="config__color config__color--red" hidden value="red">
-                    <input type="radio" id="config__color--green" name="color" class="config__color config__color--green" hidden value="green">
-                    <input type="radio" id="config__color--blue" name="color" class="config__color config__color--blue" hidden value="blue">
                     <label for="config__color--black" class="color__label color__label--black">                        
                     </label>
+                    <input type="radio" id="config__color--red" name="color" class="config__color config__color--red" hidden value="red">
                     <label for="config__color--red" class="color__label color__label--red">
                     </label>
+                    <input type="radio" id="config__color--green" name="color" class="config__color config__color--green" hidden value="green">
                     <label for="config__color--green" class="color__label color__label--green">
                     </label>
+                    <input type="radio" id="config__color--blue" name="color" class="config__color config__color--blue" hidden value="blue">
                     <label for="config__color--blue" class="color__label color__label--blue">
                     </label>
                 </div>
@@ -133,12 +132,6 @@
                 </span> 
                 <input type="radio" name="color" id="config__color--white" class="config__color config__color--eraser" hidden value="white">
                 <label for="config__color--white" class="color__label color__label--white"></label>
-                <span class="config__title">
-                    Fill bucket needing fix, also, put colors together with bucket. A good idea is a section just for colors, instead filters.
-                </span>
-                <button class="paint-bucket">
-                    <img src="icons/paint-bucket.png" alt=""></img>
-                </button>
             </div>
 
             <div class="config--hidden" id="shapes__config">
@@ -146,34 +139,112 @@
                     Closed shapes
                 </span>
                     <input type="radio" name="shapes" id="rectangle" hidden>
-                    <input type="radio" name="shapes" id="circle" hidden>
-                    <input type="radio" name="shapes" id="triangle" hidden>
                     <label class="config__shape" for="rectangle">□</label>
+                    <input type="radio" name="shapes" id="circle" hidden>
                     <label class="config__shape" for="circle">○</label>
+                    <input type="radio" name="shapes" id="triangle" hidden>
                     <label class="config__shape" for="triangle">⊿</label>
                     <span class="config__title">
-                    Draw shapes (needs bezier curve)
+                    Draw shapes
                     </span>
                     <input type="radio" name="shapes" id="line" hidden>
-                    <input type="radio" name="shapes" id="curved-line" hidden>
                     <label class="config__shape" for="line">―</label>
+                    <input type="radio" name="shapes" id="curved-line" hidden>
                     <label class="config__shape" for="curved-line">~</label>
-                    
+                    <br>
+                    <br>
+                    <p class="instruction">
+                        click inside the canvas 2 times before creating a curved line
+                    </p>
                     <span class="config__title">
                         Fill bucket
                     </span>
-                    <button class="paint-bucket" id="paint-bucket">
+                    <button id="paint-bucket">
                         <img src="icons/paint-bucket.png" alt=""> </img>
                     </button>
-            </div>
-
-            <div class="config--hidden" id="text__config">
 
             </div>
+            <div class="config--hidden" id="layer__config">
+                <button id="ruler-btn" class="hidden"></button>
+                <label for="ruler-btn">
+                    <img src="icons/ruler.png" alt="" class="ruler platform-config__tool--icon">
+                    Show ruler
+                </label>
+                    <br>
+                    <button id="layering" class="hidden">
+                    </button>
+                    <br>
+                    <label>
+                        <img src="icons/layer-multiple.png" alt="" srcset="" class="ruler platform-config__tool--icon">
+                    </label>
+                    Here's the <a href="https://drive.google.com/file/d/1pRXiEXeI2Wu_t84aCX4od70sy9vTFsF2/view">Canvas Stack Library</a> for a future implementation
+            </div>
+            
+            <div class="config--hidden instruction" id="clearcanvas__config">
+                Click inside the canvas to clear it. 
+            </div>
+            <div class="config--hidden" id="write__config">   
+                     <div>
+                        <input type='radio' name="fill" value="fill" id="filledText" checked>
+                        <label for="filledText"> Filled text</label>
+                        <input type='radio' name="fill" value="stroke" id="strokedText">
+                        <label for="strokedText">Stroked text</label>
+                    </div>
+                <div>
+                    Text:
+                    <textarea name="" id="written-text" cols="30" rows="4" placeholder="Your text goes here..."></textarea>
+                </div>
+                <div>
+
+                        <input type='radio' name="direction" value="ltr" id="ltr" checked>
+                        <label for="ltr">start left to right </label>
+                        <input type='radio' name="direction" value="rtl" id="rtl">
+                        <label for="rtl">start right to left</label>
+
+                </div>
+                <div id="font-properties">
+
+                    <span>
+                        
+                        <input type="radio" name="text-align" id="align-left" value="ltr" checked>
+                        <label for="align-left">Align left <br></label>
+                        <input type="radio" name="text-align" id="align-justify" value="justify">
+                        <label for="align-justify">Justify <br></label>
+                        <input type="radio" name="text-align" id="align-right" value="rtl">
+                        <label for="align-right">Align right</label>
+                    </span>
+                    Font size:
+                        <input type="number" name="" id="font-size" value="10">
+                    Font name:
+                        <select name="font-type" id="font-type">
+                        <option value="sans-serif" selected>Sans serif</option>
+                        <option value="'Helvetica', sans-serif">Helvetica</option>
+                        <option value="'Arial', sans-serif">Arial</option>
+                        <option value="'Arial Black', sans-serif">Arial black</option>
+                        <option value="'Verdana', sans-serif">Verdana</option>
+                        <option value="'Tahoma', sans-serif">Tahoma</option>
+                        <option value="'Impact', sans-serif">Impact</option>
+                        <option value="'Gil Sans', sans-serif">Gil Sans</option>
+                        <option value="'Times New Roman', serif">Times New Roman</option>
+                        <option value="'Georgia', serif">Georgia</option>
+                    </select>
+                </div>
+                <br>
+                <p class="instruction">
+                    Click at the canvas to position the text
+                </p>
+            </div>
+            
         </section>
         <section class="editor__view">
             <div class="view__container">
-                <canvas class="view__canvas"></canvas>
+                <div id="h-ruler" class="hidden">
+                </div>
+                <div id="v-ruler" class="hidden
+                ">
+                </div>
+                <canvas class="view__canvas">
+                </canvas>
             </div>
         </section>
         <section class="editor__platform-config"><div>
@@ -226,7 +297,10 @@
                     </label>
                 </div>
             </div>
-        </div></section>
+
+
+        </div>
+    </section>
     </main>
 </body>
 </html>

@@ -48,3 +48,80 @@ moveTo() creates a new subpath inside the beginPath(). closePath() works for sub
 
 four initial values = just the curve thus the first point stays on moveTo
         ctx.bezierCurveTo(100,100,100,100,shapeEnd['x'],shapeEnd['y'])
+
+        use objects to acess values via dynamic strings. Strings are primitive values, arent good for variables. objects 
+        are the way to use them. 
+
+        a click handler wont give you perf issues, it's that actions taken on click that 'can' cause issues.
+        I think I'll change arc to add two more event listeners, that are gonna be removed by removeEventListener
+        and by using condition to not bug
+        I'll not indeed, its not worth the time. But let's learn with that!
+        Pseudo code: On arc click, draw to an end. The end will take start and end point values as p1 and p2, also as endpoint.
+        but in the end the canvas will have a function listening for one click. This click will set p1 coordinates, restore the before all
+        saved canvas, and draw It, appending again another function, meanwhile removing itself. canvas.removeEventListener(function). This other will redo the previous,
+        but change with a new p2 coordinate. And then, remove itself from canvas again. PS: The variables emerge as saved outside the event scopes.  
+        
+
+        on mouse up -> canvas-add two event listeners:'click', if (isDrawing==='curved-line') {
+                curvePointsValueP1['x']= e.offsetX;
+                curvePointsValueP1['y']= e.offsetY;
+                remove itself - the function must have a name
+                canvas.addEventListener('click', if (isDrawing==='curved-line){
+                curvePointsValueP2['x']= e.offsetX;
+                curvePointsValueP2['y']= e.offsetY;
+                remove itself - the function must have a name
+                })
+        }
+        function addCurveControl(){
+
+        canvas.addEventListener('click', changeP1Coords)
+
+        function changeP1Coords (e) {
+                curvePointsValueP1['x']= e.offsetX;
+                curvePointsValueP1['y']= e.offsetY;
+                curvePointsValueP1['open']=true;
+                canvas.removeEventListener('click', changeP1Coords)
+                canvas.addEventListener('click', changeP2Coords)
+
+                drawing(e)
+        }
+        function changeP2Coords (e) {
+                curvePointsValueP2['x']= e.offsetX;
+                curvePointsValueP2['y']= e.offsetY;
+                curvePointsValueP2['open']=true;
+                canvas.removeEventListener('click', changeP2Coords)
+
+                drawing(e)
+                curvePointsValueP1['open']=false;
+                curvePointsValueP2['open']=false;
+        }
+        }
+
+        Foi ótimo, 40 minutinhos e a user experience mudou totalmente. Acredito que teria sido mais fácil,
+        se mantenho a mentalidade de add e remove event listener. 
+
+        Later group properties together in objects, It'll make the code a lot cleaner. Won't it duplicate code though?
+        "There is no such thing as duplicate names in Javascript. You will never get an error when re-declaring a name that already exists."
+        Executions are "code", duplicating names/variables is another, especially if the object/context is different. Co-work can't always have the same variable.
+        Also, you can use a linter later. 
+
+        Use emmet! like element[attribute=""]
+
+O CSS tem um pseudo seletor pro próximo elemento. É "+", com ele, dá pra usar o Checked e combar colocando um input
+e a label logo em seguida. O estilo só vai aplicar se estiver checked, oq ue é a intenção.
+
+This works with any explorer.
+
+document.querySelector('input[name="genderS"]:checked').value;
+
+// I will be typing in a text area, this will have the listener to onkeydown or on change, which will act in the canvas
+// os valores dos elementos mudam em tempo real, tá safe. 
+
+A propriedade checked é real nos radio buttons, certifique-se de estar clicando no elemento correto.
+https://linuxhint.com/check-radio-button-selected-javascript/
+
+certify to use a fill style when filling text.
+
+the first gradient property is the direction of the gradient. It was used on the ruler, and grouped to background-size and repeat
+
+ctx.lineWidth não aceita 0, tem que ser no mínimo 1. 

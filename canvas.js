@@ -25,7 +25,8 @@ let triangleBtn='triangle'
 let lineBtn= 'line';
 let curvedLineBtn='curved-line'
 let bucketBtn = 'paint-bucket'
-const shapes=[rectangleBtn,circleBtn,triangleBtn, lineBtn, curvedLineBtn, bucketBtn]
+let write = 'write'
+const shapes=[rectangleBtn,circleBtn,triangleBtn, lineBtn, curvedLineBtn, bucketBtn, write]
 
 for (let i=0; i<shapes.length; i++){
     let item=shapes[i]
@@ -35,6 +36,7 @@ for (let i=0; i<shapes.length; i++){
         isDrawing=item
     })
 }
+
 
 availableRes.forEach((res)=>{
     res.addEventListener('click',(e)=>{
@@ -175,16 +177,25 @@ let brushWidth=document.querySelector('#line-width');
 let shapeStart,shapeEnd;
 
 const startDraw= (e)=>{
-    ctx.lineWidth= brushWidth.value;
+    if (activeTool!== "write"){
+        ctx.lineWidth= brushWidth.value;
+    } 
+    if (activeTool==="write") {
+        ctx.lineWidth=1;
+    }
     if (activeTool==="drawing"){
         ctx.beginPath()
         isDrawing='pencil';
     }
     if (activeTool==='shapes'){
         storeOldCanvas()
+        if (isDrawing==='paint-bucket') {
+            fillBucket(e)
+        }
     }
-    if (isDrawing==='paint-bucket') {
-        fillBucket(e)
+    if (activeTool==='clearcanvas'){
+        ctx.beginPath()
+        ctx.clearRect(0,0,canvas.width,canvas.height)
     }
     
 }
@@ -322,6 +333,35 @@ function renderImage() {
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   }
 
+//   function increaseCurve(){
+//     let selectedOption= 'p' + curvePoints.value;
+//     //curvePoints.value +=1 this bugs 
+//     // pseudo code: I'll just get the value of the selected item, which will be its name. A variable here
+//     // will increase as we press sum or less, based on the selected name
+//     // xxxxxxxxxx wrong. Variables are bad for this, use objects instead, they aren't sorted and such. 
+
+//     curvePointsValue[selectedOption] += 10
+//     valueDisplayP1.textContent= 'Curve point 1 coords: ' + curvePointsValue['p1X'] + ' ' + curvePointsValue['p1Y'];
+//     valueDisplayP2.textContent= 'Curve point 2 coords: ' + curvePointsValue['p2X'] + ' ' + curvePointsValue['p2Y'];
+
+// }
+
+
+//   function decreaseCurve(){
+//     let selectedOption= 'p' + curvePoints.value;
+//     //curvePoints.value -=1 this also bugs 
+//     curvePointsValue[selectedOption] -=10
+//     valueDisplayP1.textContent= 'Bezier 1 coords: ' + curvePointsValue['p1X'] + ' ' + curvePointsValue['p1Y'];
+//     valueDisplayP2.textContent= 'Bezier 2 coords: ' + curvePointsValue['p2X'] + ' ' + curvePointsValue['p2Y'];
+// }
+
+
+  let curvePointsValueP1= {x:25,y:25, open:false}
+  let curvePointsValueP2= {x:0, y:0, open:false}
+
+//    increaseCurveBtn.addEventListener('click', increaseCurve)
+//    decreaseCurveBtn.addEventListener('click', decreaseCurve)
+
 canvas.addEventListener('mousedown', setShapeStart)
 canvas.addEventListener('mouseup', setShapeEnd)
 const drawing = (e)=> {
@@ -381,12 +421,39 @@ const drawing = (e)=> {
         ctx.drawImage(canvasSaving,0,0)
         setShapeEnd(e)
         ctx.moveTo(shapeStart['x'],shapeStart['y'])
-        ctx.bezierCurveTo(shapeEnd['x']-100,shapeEnd['y']-100,shapeEnd['x']-200,shapeEnd['y']-200,shapeEnd['x'],shapeEnd['y'])
+        // curvePointsValue object for p1 p2, although the first line should be shapestart. 
+        // PS: The input box should open only when the first curved line is draw. 
+        const p1 = curvePointsValueP1['open'] === false ? shapeStart : curvePointsValueP1;
+        const p2 = curvePointsValueP2['open'] === false ? shapeEnd : curvePointsValueP2;
+        console.log (p1, p2)
+        ctx.bezierCurveTo(p1['x'],p1['y'],p2['x'],p2['y'],shapeEnd['x'],shapeEnd['y'])
         ctx.stroke()
     }
-    inspect the JS:https://blogs.sitepointstatic.com/examples/tech/canvas-curves/bezier-curve.html
-}
+    }
+    function addCurveControl(){
 
+        canvas.addEventListener('click', changeP1Coords)
+
+        function changeP1Coords (e) {
+                curvePointsValueP1['x']= e.offsetX;
+                curvePointsValueP1['y']= e.offsetY;
+                curvePointsValueP1['open']=true;
+                canvas.removeEventListener('click', changeP1Coords)
+                canvas.addEventListener('click', changeP2Coords)
+
+                drawing(e)
+        }
+        function changeP2Coords (e) {
+                curvePointsValueP2['x']= e.offsetX;
+                curvePointsValueP2['y']= e.offsetY;
+                curvePointsValueP2['open']=true;
+                canvas.removeEventListener('click', changeP2Coords)
+
+                drawing(e)
+                curvePointsValueP1['open']=false;
+                curvePointsValueP2['open']=false;
+        }
+        }
 const endDraw = ()=>{
     shapeStart=false;
     if(isDrawing==='rectangle'){
@@ -395,6 +462,9 @@ const endDraw = ()=>{
     console.log(isDrawing)
     if(isDrawing==='pencil'){isDrawing=false;
     }
+    if (isDrawing==='curved-line') {
+        
+        addCurveControl()}
 }
 // Open tools config
 let toggleCounter;
@@ -439,6 +509,8 @@ const selectTool = (e) =>{
     if(activeToolOptions){
         activeToolOptions.classList.remove('config--hidden')
     }
+
+    
 }
 const colorBtns= document.getElementsByName('color');
 console.log(colorBtns)
@@ -453,6 +525,7 @@ colorBtns.forEach((btn)=>{
 
 closeConfigIcon.addEventListener('click', toggleToolConfig)
 
+
 const allTools=document.querySelectorAll('.tools__open')
 allTools.forEach((toolEle) => {toolEle.addEventListener('click', selectTool)})
 
@@ -465,5 +538,94 @@ function colorCanvasBg(){
     ctx.rect(0,0,canvas.width,canvas.height)
     ctx.fillStyle='#ffffff';
     ctx.fill()
+    ctx.fillStyle='#000000'
 }
 colorCanvasBg()
+
+// text properties I'll mess with: direction, fillStyle, fontValue:A string parsed as CSS font value. ,
+// fillText(), strokeText(), lineCap & lineJoin for shapes, textAlign.
+// text align is relative to X, E.G:If center is selected, the middle of the sentene will stay at the X.
+// text baseline is the same thing for Y.
+
+const textProp= {
+    x:0,
+    y:0,
+    text:''
+    //"usa o Emmet"
+}
+
+canvas.addEventListener('click', (e)=>{
+    if (activeTool==='write') {
+        console.log(activeTool)
+        textProp.x=e.offsetX;
+        textProp.y=e.offsetY;
+        drawText()
+    }
+})
+
+const textDirection=document.getElementsByName('direction')
+const textAlignEle= document.getElementsByName('text-align')
+const textSize=document.getElementById('font-size')
+const textType=document.getElementById('font-type')
+const textFill=document.getElementsByName('fill')
+const textWritten= document.getElementById('written-text')
+const ruler=document.getElementById('ruler')
+// os valores dos elementos mudam em tempo real, tá safe. 
+
+function drawText(){
+    if(activeTool==="write"){
+        const {x,y,fontSize,fontType, direction,textAlign, text}=textProp;
+        ctx.beginPath()
+        textFill.forEach((style)=>{
+                if (style.checked){
+                    console.log(style)
+                    textDirection.forEach((btn)=> {
+                        if (btn.checked) {
+                            ctx.direction=btn.value
+                        }
+                    })
+                    textAlignEle.forEach((btn)=> {
+                        if (btn.checked) {
+                            ctx.textAlign=btn.value
+                        }
+                    })
+                    
+                    ctx.fillStyle='black';
+                    ctx.font=textSize.value +'px ' + textType.value
+                    ctx[`${style.value}Text`](text, x, y)
+                }
+            })
+        }
+    }
+
+textWritten.addEventListener('keydown', (e)=>{
+    textProp.text=e.target.value + e.key;
+})
+const hRuler=document.getElementById('h-ruler')
+const vRuler= document.getElementById('v-ruler')
+const rulerBtn=document.getElementById('ruler-btn')
+rulerBtn.addEventListener('click', (e)=>{
+    hRuler.classList.toggle('hidden')
+    vRuler.classList.toggle('hidden')
+})
+
+const saveBtn= document.getElementById('save-btn')
+
+const saveImage = () => {
+    const image=canvas.toDataURL("image/url").replace("image/png", "image/octet-stream")
+    const element=document.createElement('a')
+    const filename = 'test.png';
+
+  element.setAttribute('href', image);
+  element.setAttribute('download', filename);
+
+  element.click();
+}
+saveBtn.addEventListener('click', saveImage)
+
+
+
+const shapeProp={
+    lineCap:"https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineCap", 
+    lineJoin:"https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin",
+}

@@ -70,6 +70,7 @@
 .editor__view{
     background-color: #202020;
     flex: 1;
+    overflow: hidden;
 }
 
 .editor__platform-config{
@@ -93,13 +94,16 @@
 .view__canvas{
     display: block;
     background-color: white;
-    margin: auto;
 }
 
 .view__container{
+    align-items: center;
     display:flex;
+    flex-direction: column;
     height: 95%;
+    justify-content: center;
     width: 95%;
+    position: relative;
 }
 
 .resizer__input{
@@ -193,8 +197,11 @@
     background-color: rgb(0, 255, 255);
 }
 
-.paint-bucket{
+#paint-bucket{
     background-color: black;
+    border-style: solid;
+    border-color: azure;
+    overflow: hidden;
 }
 
 .config__shape {
@@ -227,3 +234,118 @@
     padding: 5px;
     margin: 5px;
 }
+
+#clearcanvas__config {
+    text-align: center;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+#write__config div{
+    margin-top:10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-transform:uppercase;
+}
+
+#filledText, #strokedText, #ltr, #rtl{
+    display: none;
+}
+
+#font-properties span button{
+    width:32%;
+}
+
+input[type="radio"]:checked + label{
+
+    color:yellow
+}
+.instruction {
+    color: red;
+}
+
+#written-text {
+    margin: 10px 0;
+}
+
+#font-properties {
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+#layer__config .ruler{
+    display: inline;
+    margin-left: 10px;
+}
+
+#align-left, #align-justify, #align-right {
+    display: none;
+}
+
+#h-ruler{
+    position:absolute;
+    width:100%;
+    height:5em;
+    font-size:5px;
+    background:linear-gradient(peru 45%,sandybrown 45%);
+    margin: 0.5em;
+    top: 0;
+    pointer-events: none;
+    opacity: 70%;
+   }
+   #h-ruler::before,#h-ruler::after{
+    content:'';
+    position:absolute;
+    height:inherit;
+    background-image:linear-gradient(to right,darkslategray 1em,transparent 1em);
+    background-repeat:repeat-x;
+   }
+   #h-ruler::before{
+    background-size:2em 2em;
+    left:1em;
+    width:98%;
+   }
+   #h-ruler::after{
+    background-size:4em 1em;
+    left:3em;
+   }
+
+   #v-ruler{
+    position:absolute;
+    width:5em;
+    height:100%;
+    font-size:5px;
+    background:linear-gradient(to right,peru 45%,sandybrown 45%);
+    margin: 0.5em;
+    top: 0;
+    left: -5px;
+    pointer-events: none;
+    opacity: 70%;
+   }
+   #v-ruler::before,#v-ruler::after{
+    content:'';
+    position:absolute;
+    height:inherit;
+    background-image:linear-gradient(to top,darkslategray 1em,transparent 1em);
+    background-repeat:repeat-y;
+   }
+   #v-ruler::before{
+    background-size:2em 2em;
+    width:98%;
+   }
+   #h-ruler::after{
+    background-size:4em 1em;
+    left:3em;
+   }
+
+   div.hidden, .hidden{
+    display: none;
+   }
+
+   #save-btn {
+    padding: 10px;
+    font-size: 18px;
+    background-color: green;
+   }
