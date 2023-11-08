@@ -23,4 +23,6 @@ context in a different variable, creating an algorithm to draw circles/arcs, and
 - Using a paint bucket to fill shapes.
 - Clearing the canvas.
 
-[Play it!](https://canvas-photoapp.netlify.app/) 
+## How to use
+You can either open the [Demo](https://canvas-photoapp.netlify.app/),
+or install locally and open the HTML file. 
